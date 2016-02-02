@@ -23,6 +23,19 @@ def generate_checksum(param_dict, merchant_key, salt=None):
     return __encode__(hash_string, IV, merchant_key)
 
 
+def generate_checksum_by_str(param_str, merchant_key, salt=None):
+    params_string = param_str
+    salt = salt if salt else __id_generator__(4)
+    final_string = '%s|%s' % (params_string, salt)
+
+    hasher = hashlib.sha256(final_string.encode())
+    hash_string = hasher.hexdigest()
+
+    hash_string += salt
+
+    return __encode__(hash_string, IV, merchant_key)
+
+
 def verify_checksum(param_dict, merchant_key, checksum):
     # Remove checksum
     if 'CHECKSUMHASH' in param_dict:
@@ -33,6 +46,18 @@ def verify_checksum(param_dict, merchant_key, checksum):
     salt = paytm_hash[-4:]
     calculated_checksum = generate_checksum(param_dict, merchant_key, salt=salt)
     return calculated_checksum == checksum
+
+def verify_checksum_by_str(param_str, merchant_key, checksum):
+    # Remove checksum
+    #if 'CHECKSUMHASH' in param_dict:
+        #param_dict.pop('CHECKSUMHASH')
+
+    # Get salt
+    paytm_hash = __decode__(checksum, IV, merchant_key)
+    salt = paytm_hash[-4:]
+    calculated_checksum = generate_checksum_by_str(param_str, merchant_key, salt=salt)
+    return calculated_checksum == checksum
+
 
 
 def __id_generator__(size=6, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
