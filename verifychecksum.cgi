@@ -25,6 +25,11 @@ if 'GATEWAYNAME' in respons_dict:
 verify = Checksum.verify_checksum(respons_dict, MERCHANT_KEY, checksum)
 #print verify
 
+if verify:
+     respons_dict['IS_CHECKSUM_VALID'] = 'Y'
+else: 
+     respons_dict['IS_CHECKSUM_VALID'] = 'N'
+
 param_dict = json.dumps(respons_dict, separators=(',', ':'))
 #print param_dict
 
