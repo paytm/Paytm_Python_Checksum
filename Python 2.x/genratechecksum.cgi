@@ -17,6 +17,12 @@ for i in form.keys():
  respons_dict[i]=form[i].value
  if i=='ORDER_ID':
     Orderid = form[i].value
+   
+#below code snippet is mandatory, so that no one can use your checksumgeneration url for other purpose .   
+for i in respons_dict:    
+    if("REFUND" in respons_dict[i]):
+        respons_dict = {}
+        exit
 
 
 checksum = Checksum.generate_checksum(respons_dict, MERCHANT_KEY)
