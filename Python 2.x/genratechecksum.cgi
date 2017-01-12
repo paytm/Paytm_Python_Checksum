@@ -22,7 +22,7 @@ for i in form.keys():
 for i in respons_dict:    
     if("REFUND" in respons_dict[i]):
         respons_dict = {}
-        exit
+        exit()
 
 
 checksum = Checksum.generate_checksum(respons_dict, MERCHANT_KEY)
