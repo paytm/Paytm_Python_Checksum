@@ -12,6 +12,15 @@ import cgi
 
 form = cgi.FieldStorage()
 respons_dict = {}
+
+respons_dict['MID'] = '';
+respons_dict['ORDER_ID'] = '';
+respons_dict['CUST_ID'] = '';
+respons_dict['INDUSTRY_TYPE_ID'] = '';
+respons_dict['CHANNEL_ID'] = '';
+respons_dict['TXN_AMOUNT'] = '';
+respons_dict['WEBSITE'] = '';
+
 Orderid = "";
 for i in form.keys():
  respons_dict[i]=form[i].value
