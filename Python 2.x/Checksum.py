@@ -74,9 +74,6 @@ def __id_generator__(size=6, chars=string.ascii_uppercase + string.digits + stri
 def __get_param_string__(params):
     params_string = []
     for key in sorted(params.iterkeys()):
-        if("REFUND" in params[key] or "|" in params[key]):
-            respons_dict = {}
-            exit()
         value = params[key]
         params_string.append('' if value == 'null' else str(value))
     return '|'.join(params_string)
