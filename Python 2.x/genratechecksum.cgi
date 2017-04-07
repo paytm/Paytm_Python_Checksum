@@ -29,7 +29,7 @@ for i in form.keys():
    
 #below code snippet is mandatory, so that no one can use your checksumgeneration url for other purpose .   
 for i in respons_dict:    
-    if("REFUND" in respons_dict[i]):
+    if("REFUND" in respons_dict[i] or "|" in respons_dict[i]):
         respons_dict = {}
         exit()
 
