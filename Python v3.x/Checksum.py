@@ -64,16 +64,12 @@ def __id_generator__(size=6, chars=string.ascii_uppercase + string.digits + stri
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-#def __get_param_string__(params):
-#    params_string = []
-#    for key in sorted(params.iterkeys()):
-#       value = params[key]
-#        params_string.append('' if value == 'null' else str(value))
-#    return '|'.join(params_string)
-
 def __get_param_string__(params):
     params_string = []
     for key in sorted(params.iterkeys()):
+        if("REFUND" in params[key] or "|" in params[key]):
+            respons_dict = {}
+            exit()
         value = params[key]
         params_string.append('' if value == 'null' else str(value))
     return '|'.join(params_string)
@@ -92,16 +88,17 @@ def __encode__(to_encode, iv, key):
     to_encode = base64.b64encode(to_encode)
     return to_encode
 
-
 def __decode__(to_decode, iv, key):
     # Decode
     to_decode = base64.b64decode(to_decode)
     # Decrypt
     c = AES.new(key, AES.MODE_CBC, iv)
     to_decode = c.decrypt(to_decode)
+    if type(to_decode) == bytes:
+        # convert bytes array to str.
+        to_decode = to_decode.decode()
     # remove pad
     return __unpad__(to_decode)
-
 
 if __name__ == "__main__":
     params = {
