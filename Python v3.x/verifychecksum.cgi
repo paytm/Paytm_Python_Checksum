@@ -1,32 +1,63 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+
+import cgitb
+cgitb.enable()
 
 import Checksum
 #import requests
 import base64
 #import json
-#import requests
+# import requests
 
-print "Content-type: text/html\n"
-MERCHANT_KEY = 'XXXXXXXX';
-#import cgi
+MERCHANT_KEY = 'XXXXXXXXXXXXXXXX';
 
-response_params= {}  # Pass paytm response here
-respons_dict = {}
+print("Content-type: text/html\n\n");
 
-for i in response_params.keys():
- respons_dict[i]=response_params[i].value
- if i=='CHECKSUMHASH':
-    checksum = response_params[i].value
 
-if 'GATEWAYNAME' in respons_dict:
-	if respons_dict['GATEWAYNAME'] == 'WALLET':
-		respons_dict['BANKNAME'] = 'null';
+import os
 
-verify = Checksum.verify_checksum(respons_dict, MERCHANT_KEY, checksum)
+if os.environ['REQUEST_METHOD'] == 'POST':
+	import cgi
+	form = cgi.FieldStorage(keep_blank_values = 1)
+	response = {}
+	for key in form.keys():
+		if key == 'CHECKSUMHASH':
+			checksum = form[key].value
+		else:
+			response[key] = form[key].value
+		
+	print(response, "<br/><br/>")
+	verify = Checksum.verify_checksum(response, MERCHANT_KEY, checksum)
+	print("Checksum Result: ", verify)
 
-print verify
+# else:
+# 	response = {}
+# 	response["ORDERID"] = "ORDER_001"
+# 	response["MID"] = "XXXXXXXXXXXXXXXXXXXX"
+# 	response["TXNID"] = "20180427111212800110168746100011251"
+# 	response["TXNAMOUNT"] = "1.00"
+# 	response["PAYMENTMODE"] = "PPI"
+# 	response["CURRENCY"] = "INR"
+# 	response["TXNDATE"] = "2018-04-27 15:45:05.0"
+# 	response["STATUS"] = "TXN_SUCCESS"
+# 	response["RESPCODE"] = "01"
+# 	response["RESPMSG"] = "Txn Success"
+# 	response["GATEWAYNAME"] = "WALLET"
+# 	response["BANKTXNID"] = ""
+# 	response["BANKNAME"] = "WALLET"
+# 	response["CHECKSUMHASH"] = "l0WJTnFq3sfRdMS4TBq67z2zUy1dmlN8U0WT9B3EiA5vym3nm2JTppd6MPE0iITD8yTqYSDJb4MBibx2FGqJ2ZPjjtfVzOugrAz4XLR2ypc="
 
-#if checksum is validated Kindly verify the amount and status 
-#if transaction is successful 
-#kindly call Paytm Transaction Status API and verify the transaction amount and status.
-#If everything is fine then mark that transaction as successful into your DB.
+# 	for key, val in response.items():
+# 		if key == 'CHECKSUMHASH':
+# 			checksum = val
+
+
+	# print(response, "<br/><br/>")
+	# verify = Checksum.verify_checksum(response, MERCHANT_KEY, checksum)
+	# print("Checksum Result: ", verify)
+
+
+# if checksum is validated Kindly verify the amount and status 
+# if transaction is successful 
+# kindly call Paytm Transaction Status API and verify the transaction amount and status.
+# If everything is fine then mark that transaction as successful into your DB.
