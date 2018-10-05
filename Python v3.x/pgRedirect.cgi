@@ -14,7 +14,6 @@ print("Content-type: text/html\n\n");
 PAYTM_MERCHANT_MID = 'XXXXXXXXXXXXXXXXXXXX'
 PAYTM_MERCHANT_KEY = 'XXXXXXXXXXXXXXXX'
 PAYTM_MERCHANT_WEBSITE = 'XXXXXXXXXX'
-# PAYTM_TXN_URL = "https://pguat.paytm.com/oltp-web/processTransaction"
 PAYTM_TXN_URL = "https://securegw-stage.paytm.in/theia/processTransaction"
 
 import cgi
