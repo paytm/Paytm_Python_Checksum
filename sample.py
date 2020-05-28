@@ -13,8 +13,8 @@ paytmParams["ORDERID"] = "YOUR_ORDER_ID_HERE"
 
 # Generate checksum by parameters we have
 # Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
-paytmChecksum = PaytmChecksum.generateSignature(paytmParams, "YOUR_KEY_HERE")
-verifyChecksum = PaytmChecksum.verifySignature(paytmParams, "YOUR_KEY_HERE",paytmChecksum)
+paytmChecksum = PaytmChecksum.generateSignature(paytmParams, "YOUR_MERCHANT_KEY")
+verifyChecksum = PaytmChecksum.verifySignature(paytmParams, "YOUR_MERCHANT_KEY",paytmChecksum)
 
 print("generateSignature Returns:" + str(paytmChecksum))
 print("verifySignature Returns:" + str(verifyChecksum))
@@ -25,8 +25,8 @@ body = "{\"mid\":\"YOUR_MID_HERE\",\"orderId\":\"YOUR_ORDER_ID_HERE\"}"
 
 # Generate checksum by parameters we have
 # Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
-paytmChecksum = PaytmChecksum.generateSignature(body, "YOUR_KEY_HERE")
-verifyChecksum = PaytmChecksum.verifySignature(body, "YOUR_KEY_HERE", paytmChecksum)
+paytmChecksum = PaytmChecksum.generateSignature(body, "YOUR_MERCHANT_KEY")
+verifyChecksum = PaytmChecksum.verifySignature(body, "YOUR_MERCHANT_KEY", paytmChecksum)
 
 print("generateSignature Returns:" + str(paytmChecksum))
 print("verifySignature Returns:" + str(verifyChecksum))

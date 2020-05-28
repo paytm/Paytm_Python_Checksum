@@ -42,9 +42,11 @@ def generateSignature(params, key):
 def verifySignature(params, key, checksum):
     if not type(params) is dict and not type(params) is str:
         raise Exception("string or dict expected, " + str(type(params)) + " given")
+    if "CHECKSUMHASH" in params:
+        del params["CHECKSUMHASH"]
+        
     if type(params) is dict:
         params = getStringByParams(params)
-    
     return verifySignatureByString(params, key, checksum)
 
 def generateSignatureByString(params, key):    
@@ -63,7 +65,7 @@ def generateRandomString(length):
 def getStringByParams(params):
     params_string = []
     for key in sorted(params.keys()):
-        value = "" if params[key] is None else params[key]
+        value = params[key] if params[key] is not None and params[key].lower() != "null" else ""
         params_string.append(str(value))
     return '|'.join(params_string)
 
