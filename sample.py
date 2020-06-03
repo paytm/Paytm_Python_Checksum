@@ -1,8 +1,9 @@
 # More Details: https://developer.paytm.com/docs/checksum/#python
 
-import PaytmChecksum
 import requests
 import json
+
+from paytmchecksum import PaytmChecksum
 
 # Generate Checksum via Hash/Array
 # initialize an Hash/Array

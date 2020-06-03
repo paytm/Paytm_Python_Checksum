@@ -4,7 +4,7 @@ long_description = "https://developer.paytm.com/docs/checksum/#python"
     
 setuptools.setup(
     name="paytmchecksum",
-    version="1.5.0",
+    version="1.6.0",
     description="This is for paytm checksum creation and verification in python",
     url="https://github.com/paytm/Paytm_Python_Checksum",
     author="Soumya Vats",
