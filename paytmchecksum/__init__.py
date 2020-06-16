@@ -1,1 +1,1 @@
-from PaytmChecksum import generateSignature, verifySignature, encrypt, decrypt
+from .PaytmChecksum import generateSignature, verifySignature, encrypt, decrypt
