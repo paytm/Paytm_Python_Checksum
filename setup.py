@@ -1,7 +1,11 @@
 import setuptools
 
 long_description = "https://developer.paytm.com/docs/checksum/#python"
-    
+
+requires = [
+    "pycryptodomex==3.9.7"
+]
+
 setuptools.setup(
     name="paytmchecksum",
     version="1.6.0",
@@ -28,5 +32,6 @@ setuptools.setup(
         'Programming Language :: Python :: 3.6',
 
         "Topic :: Software Development :: Libraries :: Python Modules",
-    ]
+    ],
+    install_requires=requires
  )
