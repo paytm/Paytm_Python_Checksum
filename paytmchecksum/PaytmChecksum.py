@@ -59,8 +59,8 @@ def verifySignatureByString(params, key, checksum):
     return paytm_hash == calculateHash(params, salt)
 
 def generateRandomString(length):
-    chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
-    return ''.join(random.choice(chars) for _ in range(length))
+    chars = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(length))
+    return chars
 
 def getStringByParams(params):
     params_string = []
