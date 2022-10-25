@@ -1,7 +1,7 @@
 import setuptools
 
 long_description = "https://developer.paytm.com/docs/checksum/#python"
-    
+
 setuptools.setup(
     name="paytmchecksum",
     version="1.7.0",
@@ -9,7 +9,11 @@ setuptools.setup(
     url="https://github.com/paytm/Paytm_Python_Checksum",
     author="Soumya Vats",
     license="MIT",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(
+        include=['paytmchecksum', 'paytmchecksum.*']),
+    install_requires=[
+        'pycryptodome==3.15.0'
+    ],
     keywords='Paytm Checksum Python Signature Payment',
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -29,4 +33,4 @@ setuptools.setup(
 
         "Topic :: Software Development :: Libraries :: Python Modules",
     ]
- )
+)
