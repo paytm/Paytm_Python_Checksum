@@ -6,7 +6,6 @@ import sys
 
 from Crypto.Cipher import AES
 
-
 iv = '@@@@&&&&####$$$$'
 BLOCK_SIZE = 16
 
